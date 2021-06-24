@@ -19,7 +19,7 @@ const ProductFeeds = ({ products }) => {
                     <ProductCard 
                         product={p}
                         key={p.id} 
-                        className={ i!==0 && (i%10===4 || i%10===9)  && 'col-span-2' }
+                        className={ i!==0 && (i%10===4 || i%10===9)  && 'md:col-span-2' }
                     />
                     {i%5===0 && (<img
                         className='mx-auto md:col-span-full' 
