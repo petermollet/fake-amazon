@@ -29,19 +29,8 @@ const ProductFeeds = ({ products }) => {
                 </>
             )) }
 
-
-
         </div>
     )
 }
 
 export default ProductFeeds
-
-/*
-<div className='col-span-2'>
-    { products.slice(4,5).map(p => <ProductCard product={p} key={p.id} />) }
-</div>
-
-{ products.slice(5,products.length).map(p => <ProductCard product={p} key={p.id} />) }
-
-*/
