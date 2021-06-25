@@ -2,13 +2,25 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { StarIcon } from '@heroicons/react/solid'
 import Currency from 'react-currency-formatter'
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../slices/cartSlice';
 
 const MAX_RATING = 5
-const MIN_RATING = 1
+const MIN_RATING = 2
 
-const ProductCard = ({ className, product: {id, title, price, description, category, image }}) => {
+const ProductCard = ({ className, product, product: {id, title, price, description, category, image }}) => {
+
+    const dispatch = useDispatch()
+
     const rating = Math.floor( Math.random() * (MAX_RATING - MIN_RATING +1) + MIN_RATING)
     const hasPrime = Math.random() < 0.5
+
+    const addItemToCart = () => {
+        let productToAdd = {...product}
+        productToAdd.rating = rating
+        productToAdd.hasPrime = hasPrime
+        dispatch(addToCart(productToAdd))
+    }
 
     return (
         <div className={`${className} relative flex flex-col m-5 bg-white z-30 p-10`}>
@@ -20,11 +32,15 @@ const ProductCard = ({ className, product: {id, title, price, description, categ
 
             <h4 className='my-3'>{title}</h4>
 
-            <div className='flex text-yellow-500'>
-                {Array(rating).fill().map((_, i) => <StarIcon key={i} className='h-5' />)}
+            <div className='flex '>
+                {Array(rating).fill().map((_, i) => (
+                    <StarIcon key={i} className='h-5 text-yellow-500' />
+                ))}
             </div>
 
-            <p className='text-xs my-2 line-clamp-2'>{description}</p>
+            <p className='text-xs my-2 line-clamp-2'>
+                {description}
+            </p>
 
             <div className='mb-5'>
                 <Currency quantity={price} currency='EUR' decimal='.'/>
@@ -37,7 +53,10 @@ const ProductCard = ({ className, product: {id, title, price, description, categ
                 </div>
             )}
 
-            <button className='mt-auto button'>
+            <button
+                onClick={addItemToCart}
+                className='mt-auto button'
+            >
                 Add to cart
             </button>
         </div>

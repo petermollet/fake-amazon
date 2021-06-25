@@ -2,8 +2,6 @@
 import { Fragment } from 'react';
 import ProductCard from './ProductCard';
 
-const BREAK_POINT = 4
-
 const ProductFeeds = ({ products }) => {
 
     const adds = [
@@ -15,7 +13,7 @@ const ProductFeeds = ({ products }) => {
         -mt-20 md:-mt-44'>
 
             { products.map((p, i) => (
-                <>
+                <Fragment key={p.id}>
                     <ProductCard 
                         product={p}
                         key={p.id} 
@@ -26,7 +24,7 @@ const ProductFeeds = ({ products }) => {
                         src={adds[0]}
                         alt=''
                     />)}
-                </>
+                </Fragment>
             )) }
 
         </div>

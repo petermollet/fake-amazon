@@ -13,6 +13,9 @@ module.exports = {
           DEFAULT: "#131921",
         },
       },
+      screens:{
+        'xs': '581px',
+      }
     },
   },
   variants: {
